@@ -3,16 +3,18 @@
 #include <math.h>
 //compiler avec -lm
 
-float cardinale(int N, int i, float *val, float x){
+/*fonction permettant le calcul de la fonction auxiliaire cardinale
+*/
+float cardinale(int N, int i, float *val, float x){  // Soit N le nombre de points, i l'indice, val le tableau contenant les valeurs de x_i, et x le réel rentré par l'utilisateur
 	float denominateur=1;
 	float numerateur=1;
 	for(int j=0; j<N; j++){
-		if(j!=i){
-			denominateur*=(val[i]- val[j]);
-			numerateur*=(x-val[j]);
+		if(j!=i){   //pour j=0 allant à N-1 (avec j!=i), on calcule séparément le numérateur et le dénominateur
+			denominateur*=(val[i]- val[j]); //on multiplie la valeur du dénominateur possédée par x_i-x_j
+			numerateur*=(x-val[j]); //on multiplie la valeur du numénateur possédé par x-x_j
 		}
 	}
-	return numerateur/denominateur;
+	return numerateur/denominateur; //on renvoie le résultat approché de la fraction
 }
 
 float lagrange(int N, float **val, float x){
@@ -22,83 +24,18 @@ float lagrange(int N, float **val, float x){
 	}
 	return y;
 }
-/*
-void difference_divisee(float **val, int k, int i, float ** diff_div){
-	if(k==1){
-		diff_div[1][i]= ((val[1][i] - val[1][1])/(val[0][i]-val[0][1]));
-	}
-	else{
-		diff_div[k][i]= ((diff_div[k-1][i] - diff_div[k-1][k])/(val[0][i]-val[0][k]));
-	}
-}
 
-float newton(float **val, int N, float x){
-	
-	float **diff_div=malloc(sizeof(float *)*N-2);
-	for(int i=n-1;i>1;i--){
-		diff_div[i]=malloc(sizeof(float)*i);
-	}
-
-	for(int k=0;k<N-2;k++){
-		for(int i=0;i<N-1-k;i++){
-			difference_divisee(val, k, i, diff_div );
-		}
-	}
-
-	float y=diff_div[][];
-
-	for(int i=0; i<N;i++){
-		y+=diff_div[i][i];
-	}
-
-	for(int i=n-1;i>1;i--){
-		free(diff_div[i]);
-	}
-	free(diff_div);
-}
-*/
 
 float neville(int i, int k, float x, float **val){
 
-	if(k==0){
+	if(k==0){ //quand le polynôme atteint le degré 0 on renvoie y_i
 		return val[1][i];
 	}
 	else{
 		return(((x-val[0][i+k])*neville(i, k-1, x, val) + (val[0][i] - x)*neville(i+1, k-1,x, val))/(val[0][i]-val[0][i+k]));
 	}
 }
-/*
-float moyenne_x_ou_y(float *val, int n){
-	float somme=0;
-	for(int i=0;i<n;i++){
-		somme+=val[i];
-	}
-	return somme/n;
-}
 
-float moyenne_xy(float **val, int n){
-	float somme=0;
-	for(int i=0;i<n;i++){
-		somme+=val[1][i]*val[0][i];
-	}
-	return somme/n;
-}
-
-float moyenne_x_au_carre(float *val, int n){
-	float somme=0;
-	for(int i=0;i<n;i++){
-		somme+=powf(val[i],2);
-	}
-	return somme/n;
-}
-
-float regression(float **val, int N, float x){
-	float a1=(moyenne_xy(val, N) - moyenne_x_ou_y(val[0],N)*moyenne_x_ou_y(val[1],N))/(moyenne_x_au_carre(val[0],N)-powf(moyenne_x_ou_y(val[0],N),2));
-	float a0=(moyenne_x_ou_y(val[1], N)*moyenne_x_au_carre(val[0],N) - moyenne_x_ou_y(val[0],N)*moyenne_xy(val,N))/(moyenne_x_au_carre(val[0],N)-powf(moyenne_x_ou_y(val[0],N),2));
-	printf("%f\n%f\n",a1,a0);
-	return a1*x+a0;
-}
-*/
 float *regression(float **val, int n){
 	float *fonct=malloc(sizeof(float)*2);
 	float moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0;
@@ -118,13 +55,14 @@ float *axb(float **val, int n){
 	float *fonct=malloc(sizeof(float)*2);
 	float moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0;
 	for(int i=0;i<n;i++){
-		moy_x_au_carre+=powf(val[0][i],2);
-		moy_y+=val[1][i];
-		moy_x+=val[0][i];
-		moy_xy+=val[0][i]*val[1][i];
+		moy_x_au_carre+=powf(logf(val[0][i]),2);
+		moy_y+=logf(val[1][i]);
+		moy_x+=logf(val[0][i]);
+		moy_xy+=logf(val[0][i])*logf(val[1][i]);
 	}
 	float b=(moy_xy - moy_x*moy_y)/(moy_x_au_carre-powf(moy_x,2));
-	float a=powf(10, moy_y-b*moy_x);
+	printf("%f\n",moy_y-b*moy_x);
+	float a=powf(10, moy_y-(b*moy_x));
 	fonct[0]=a;
 	fonct[1]=b;
 	return fonct;
@@ -135,13 +73,13 @@ int main(){
 
 	int choix, x;
 	float *f=NULL;
+	float **val=malloc(sizeof(float *)*2);
 	printf("Choississez le jeu d'essai :\n");
 	scanf("%d",&choix);
 	printf("Choississez un point x :\n");
 	scanf("%d",&x);
 	switch(choix){
 		case 1:
-			float **val=malloc(sizeof(float *)*2);
 			for(int i=0;i<2;i++){
 				val[i]=malloc(sizeof(float)*20);
 			}
@@ -178,117 +116,145 @@ int main(){
 			for(int i=0;i<2;i++){
 				free(val[i]);
 			}
-			free(val);
 
 			break;
 
 		case 2 :
-			float **val2=malloc(sizeof(float *)*2);
+			
 			for(int i=0;i<2;i++){
-				val2[i]=malloc(sizeof(float)*21);
+				val[i]=malloc(sizeof(float)*21);
 			}
 
-			val2[1][0]=85;
-			val2[1][1]=83;
-			val2[1][2]=162;
-			val2[1][3]=79;
-			val2[1][4]=81;
-			val2[1][5]=83;
-			val2[1][6]=281;
-			val2[1][7]=81;
-			val2[1][8]=81;
-			val2[1][9]=80;
-			val2[1][10]=243;
-			val2[1][11]=84;
-			val2[1][12]=84;
-			val2[1][13]=82;
-			val2[1][14]=80;
-			val2[1][15]=226;
-			val2[1][16]=260;
-			val2[1][17]=82;
-			val2[1][18]=186;
-			val2[1][19]=77;
-			val2[1][20]=223;
+			val[1][0]=85;
+			val[1][1]=83;
+			val[1][2]=162;
+			val[1][3]=79;
+			val[1][4]=81;
+			val[1][5]=83;
+			val[1][6]=281;
+			val[1][7]=81;
+			val[1][8]=81;
+			val[1][9]=80;
+			val[1][10]=243;
+			val[1][11]=84;
+			val[1][12]=84;
+			val[1][13]=82;
+			val[1][14]=80;
+			val[1][15]=226;
+			val[1][16]=260;
+			val[1][17]=82;
+			val[1][18]=186;
+			val[1][19]=77;
+			val[1][20]=223;
 
-			val2[0][0]=752;
-			val2[0][1]=855;
-			val2[0][2]=871;
-			val2[0][3]=734;
-			val2[0][4]=610;
-			val2[0][5]=582;
-			val2[0][6]=921;
-			val2[0][7]=492;
-			val2[0][8]=569;
-			val2[0][9]=462;
-			val2[0][10]=907;
-			val2[0][11]=643;
-			val2[0][12]=862;
-			val2[0][13]=524;
-			val2[0][14]=679;
-			val2[0][15]=902;
-			val2[0][16]=918;
-			val2[0][17]=828;
-			val2[0][18]=875;
-			val2[0][19]=809;
-			val2[0][20]=894;
+			val[0][0]=752;
+			val[0][1]=855;
+			val[0][2]=871;
+			val[0][3]=734;
+			val[0][4]=610;
+			val[0][5]=582;
+			val[0][6]=921;
+			val[0][7]=492;
+			val[0][8]=569;
+			val[0][9]=462;
+			val[0][10]=907;
+			val[0][11]=643;
+			val[0][12]=862;
+			val[0][13]=524;
+			val[0][14]=679;
+			val[0][15]=902;
+			val[0][16]=918;
+			val[0][17]=828;
+			val[0][18]=875;
+			val[0][19]=809;
+			val[0][20]=894;
 
-			printf("Avec la méthode de Lagrange, on trouve y = %f\n\n",lagrange(21,val2,x));
-			printf("Avec la méthode de Neville, on trouve y = %f\n\n",neville(0,20,x,val2));
-			f=regression(val2, 21);
+			printf("Avec la méthode de Lagrange, on trouve y = %f\n\n",lagrange(21,val,x));
+			printf("Avec la méthode de Neville, on trouve y = %f\n\n",neville(0,20,x,val));
+			f=regression(val, 21);
 			printf("Par aproximation, on obtient la droite de régression : %fx + %f\n\n",f[1],f[0]);
 			
 			for(int i=0;i<2;i++){
-				free(val2[i]);
+				free(val[i]);
 			}
-			free(val2);
+
 
 			break;
 
 		case 3 :
-			float **val3=malloc(sizeof(float *)*2);
+			
 			for(int i=0;i<2;i++){
-				val3[i]=malloc(sizeof(float)*11);
+				val[i]=malloc(sizeof(float)*11);
 			}
 
-			val3[1][0]=8.04;
-			val3[1][1]=6.95;
-			val3[1][2]=7.58;
-			val3[1][3]=8.81;
-			val3[1][4]=8.33;
-			val3[1][5]=9.96;
-			val3[1][6]=7.24;
-			val3[1][7]=4.26;
-			val3[1][8]=10.84;
-			val3[1][9]=4.82;
-			val3[1][10]=5.68;
+			val[1][0]=8.04;
+			val[1][1]=6.95;
+			val[1][2]=7.58;
+			val[1][3]=8.81;
+			val[1][4]=8.33;
+			val[1][5]=9.96;
+			val[1][6]=7.24;
+			val[1][7]=4.26;
+			val[1][8]=10.84;
+			val[1][9]=4.82;
+			val[1][10]=5.68;
 			
 
-			val3[0][0]=10;
-			val3[0][1]=8;
-			val3[0][2]=13;
-			val3[0][3]=9;
-			val3[0][4]=11;
-			val3[0][5]=14;
-			val3[0][6]=6;
-			val3[0][7]=4;
-			val3[0][8]=12;
-			val3[0][9]=7;
-			val3[0][10]=5;
+			val[0][0]=10;
+			val[0][1]=8;
+			val[0][2]=13;
+			val[0][3]=9;
+			val[0][4]=11;
+			val[0][5]=14;
+			val[0][6]=6;
+			val[0][7]=4;
+			val[0][8]=12;
+			val[0][9]=7;
+			val[0][10]=5;
 			
 
-			printf("Avec la méthode de Lagrange, on trouve y = %f\n\n",lagrange(11,val3,x));
-			printf("Avec la méthode de Neville, on trouve y = %f\n\n",neville(0,10,x,val3));
-			f=regression(val3, 11);
+			printf("Avec la méthode de Lagrange, on trouve y = %f\n\n",lagrange(11,val,x));
+			printf("Avec la méthode de Neville, on trouve y = %f\n\n",neville(0,10,x,val));
+			f=regression(val, 11);
 			printf("Par aproximation, on obtient la droite de régression : %fx + %f\n\n",f[1],f[0]);
 
 			for(int i=0;i<2;i++){
-				free(val3[i]);
+				free(val[i]);
 			}
-			free(val3);
+			
 
 			break;
 
 		case 4 :
+			for(int i=0;i<2;i++){
+				val[i]=malloc(sizeof(float)*7);
+			}
+
+			val[1][0]=352;
+			val[1][1]=128;
+			val[1][2]=62.3;
+			val[1][3]=35.7;
+			val[1][4]=6.3;
+			val[1][5]=0.4;
+			val[1][6]=0.1;
+			
+			
+
+			val[0][0]=20;
+			val[0][1]=30;
+			val[0][2]=40;
+			val[0][3]=50;
+			val[0][4]=100;
+			val[0][5]=300;
+			val[0][6]=500;
+			
+			f=axb(val, 7);
+			printf("On obtient les contantes positives a = %f et A = %f\n",f[1],f[0]);
+			printf("Soit y = %f\n", f[0]*powf(x,-f[1]));
+
+			for(int i=0;i<2;i++){
+				free(val[i]);
+			}
 
 			break;
 
@@ -296,6 +262,7 @@ int main(){
 			printf("Mauvais choix\n");
 	}
 	free(f);
+	free(val);
 	
 
 }
