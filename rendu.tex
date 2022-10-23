@@ -132,6 +132,18 @@ Université Clermont Auvergne\\}
 	
 	\subsubsection{Neville}
 	
+	Le but de la méthode est d'obtenir le polynôme $P_{N-1}[x_1,x_2,... ,x_N]$ en fonction des deux polynômes de degré inférieur : $P_{N-2}[x_1,x_2,... ,x_{N-1}]$ et $P_{N-2}[x_2,x_3... ,x_{N}]$. Ces deux polynômes se trouvent chacun grâce à deux autres polynômes de degré inférieur, et ainsi de suite...\\
+	Ainsi en partant des polynômes d'interpolation $P_0[x_i]$, on arrive à $P_{N-1}$.\\
+	Pour cela, on a les formules :\\
+	\begin{align}
+		\begin{split}
+	&\forall x,P_0[x_i]=y_i,i=1,...,N\\
+	&\forall x,P_1[x_i,x_{}i+1](x)=\frac{(x-x_{i+k})P_{0}[x_i](x)+(x_i-x)P_{0}[x_{i+1}](x)}{x_i-x_{i+1}},i=1,...,N\\
+	&\forall x,P_k[x_i,...,x_{i+1}](x)=\frac{(x-x_{i+k})P_{k-1}[x_i,...,x_{i+k-1}](x)+(x_i-x)P_{k-1}[x_{i+1},...,x{i+k}(x)]}{x_i-x_{i+k}},\\
+	&\forall k=2,...,N-1
+		\end{split}
+	\end{align}
+	
 	\subsection{Méthodes d'approximation}
 	
 	\subsubsection{Droite de régression}
