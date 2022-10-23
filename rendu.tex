@@ -1,0 +1,167 @@
+
+\documentclass[12pt,french,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{darkWhite}{rgb}{0.94,0.94,0.94}
+\usepackage{tcolorbox,listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=-2mm,
+  backgroundcolor=\color{darkWhite},
+  basicstyle=\footnotesize,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=bc,
+  commentstyle=\color{ForestGreen},
+  deletekeywords={...},
+  escapeinside={\%*}{*)},
+  extendedchars=true,
+  keepspaces=true,
+  keywordstyle=\color{blue},
+  language=C,
+  literate=
+  {²}{{\textsuperscript{2}}}1
+  {⁴}{{\textsuperscript{4}}}1
+  {⁶}{{\textsuperscript{6}}}1
+  {⁸}{{\textsuperscript{8}}}1
+  {€}{{\euro{}}}1
+  {é}{{\'e}}1
+  {è}{{\`{e}}}1
+  {ê}{{\^{e}}}1
+  {ë}{{\¨{e}}}1
+  {É}{{\'{E}}}1
+  {Ê}{{\^{E}}}1
+  {û}{{\^{u}}}1
+  {ù}{{\`{u}}}1
+  {â}{{\^{a}}}1
+  {à}{{\`{a}}}1
+  {á}{{\'{a}}}1
+  {ã}{{\~{a}}}1
+  {Á}{{\'{A}}}1
+  {Â}{{\^{A}}}1
+  {Ã}{{\~{A}}}1
+  {ç}{{\c{c}}}1
+  {Ç}{{\c{C}}}1
+  {õ}{{\~{o}}}1
+  {ó}{{\'{o}}}1
+  {ô}{{\^{o}}}1
+  {Õ}{{\~{O}}}1
+  {Ó}{{\'{O}}}1
+  {Ô}{{\^{O}}}1
+  {î}{{\^{i}}}1
+  {Î}{{\^{I}}}1
+  {í}{{\'{i}}}1
+  {Í}{{\~{Í}}}1,
+  %morekeywords={*,...},
+  numbers=left,
+  numbersep=10pt,
+  numberstyle=\tiny\color{black},
+  rulecolor=\color{black},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stepnumber=1,
+  stringstyle=\color{gray},
+  tabsize=4,
+  title=\lstname,
+}
+\lstdefinestyle{frameStyle}{
+    basicstyle=\footnotesize,
+    numbers=left,
+    numbersep=20pt,
+    numberstyle=\tiny\color{black}
+}
+ 
+\tcbuselibrary{listings,skins,breakable}
+ 
+\newtcbinputlisting{\cinput}[2][]{
+    arc=0mm,
+    top=0mm,
+    bottom=1mm,
+    left=3mm,
+    right=0mm,
+    width=\textwidth,
+    %listing engine=listings,
+    listing file={#2},
+    listing only,
+    listing options={style=frameStyle},
+    breakable
+}
+ 
+
+\title{TP Interpolation polynômiale et Approximation.}
+\medskip
+
+\author{Salmân Abibou \& Rodrigo Ferreira Rodrigues \\
+Université Clermont Auvergne\\}
+\vfill
+
+\date{\today}
+
+\begin{document}
+	\maketitle
+
+
+	\tableofcontents
+	\newpage
+	
+	\section{Rappel des méthodes}
+	On notera $N$ le nombre de points $(x_i,y_i)$ connues.
+	\subsection{Méthodes d'interpolation}
+	
+	\subsubsection{Lagrange}
+
+	On cherche à exprimer le polynôme $P_{N-1}$ de la forme :
+	\begin{equation}
+	P_{N-1}(x) = \sum_{i=0}^{(N-1)}y_i\cdot l_i(x)
+	\end{equation}
+	où $l_i(x)$ est la fonction cardinale définie par :
+	
+	\begin{equation}
+	l_i(x) = \prod_{j=0,j\neq i}^{(N-1)}\frac{x - x_j}{x_i - x_j}
+	\end{equation}
+	
+	\subsubsection{Neville}
+	
+	\subsection{Méthodes d'approximation}
+	
+	\subsubsection{Droite de régression}
+	
+	\subsubsection{Ajustement puissance du type $y = ax^b$}
+	
+	\section{Explication fonctions du porgramme}
+	
+	\subsection{Fonction Cardinale}
+	
+	\subsection{Fonction Lagrange}
+	
+	\subsection{Fonction Neville}
+	
+	\subsection{Fonction régression}
+	
+	\subsection{Fonction axb}
+	
+	\section{Analyse jeux d'essais}
+	
+	\subsection{Densité ($D$) de l'eau en fonction de la température (T)}
+	
+	\subsection{Dépenses mensuelles et revenus}
+	
+	\subsection{Série $S$ dûe à Ascombe}
+	
+	\subsection{Loi de Pareto}
+	
+	\section{Conclusion}
+	
+	
+	
+\end{document}
