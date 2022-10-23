@@ -45,6 +45,12 @@ float *regression(float **val, int n){
 		moy_x+=val[0][i];
 		moy_xy+=val[0][i]*val[1][i];
 	}
+	
+	moy_y=moy_y/n;
+	moy_x_au_carre=moy_x_au_carre/n;
+	moy_x=moy_x/n;
+	moy_xy=moy_xy/n;
+	
 	fonct[1]=(moy_xy - moy_x*moy_y)/(moy_x_au_carre-powf(moy_x,2));
 	fonct[0]=(moy_y*moy_x_au_carre-moy_x*moy_xy)/(moy_x_au_carre-powf(moy_x,2));
 	return fonct;
@@ -55,16 +61,24 @@ float *axb(float **val, int n){
 	float *fonct=malloc(sizeof(float)*2);
 	float moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0;
 	for(int i=0;i<n;i++){
-		moy_x_au_carre+=powf(logf(val[0][i]),2);
-		moy_y+=logf(val[1][i]);
-		moy_x+=logf(val[0][i]);
-		moy_xy+=logf(val[0][i])*logf(val[1][i]);
+		moy_x_au_carre+=powf(log10f(val[0][i]),2);
+		moy_y+=log10f(val[1][i]);
+		moy_x+=log10f(val[0][i]);
+		moy_xy+=log10f(val[0][i])*log10f(val[1][i]);
 	}
-	float b=(moy_xy - moy_x*moy_y)/(moy_x_au_carre-powf(moy_x,2));
-	printf("%f\n",moy_y-b*moy_x);
-	float a=powf(10, moy_y-(b*moy_x));
-	fonct[0]=a;
-	fonct[1]=b;
+	moy_y=moy_y/n;
+	moy_x_au_carre=moy_x_au_carre/n;
+	moy_x=moy_x/n;
+	moy_xy=moy_xy/n;
+	printf("moy_x_au_carre : %f\n",moy_x_au_carre);
+	printf("moy_y : %f\n",moy_y);
+	printf("moy_x : %f\n",moy_x);
+	printf("moy_xy : %f\n", moy_xy);
+	float a=(moy_xy - moy_x*moy_y)/(moy_x_au_carre-powf(moy_x,2));
+	printf("%f\n",moy_y-(a*moy_x));
+	float A=powf(10, moy_y-(a*moy_x));
+	fonct[0]=A;
+	fonct[1]=a;
 	return fonct;
 
 }
@@ -186,7 +200,7 @@ int main(){
 			for(int i=0;i<2;i++){
 				val[i]=malloc(sizeof(float)*11);
 			}
-
+			
 			val[1][0]=8.04;
 			val[1][1]=6.95;
 			val[1][2]=7.58;
@@ -211,6 +225,7 @@ int main(){
 			val[0][8]=12;
 			val[0][9]=7;
 			val[0][10]=5;
+
 			
 
 			printf("Avec la méthode de Lagrange, on trouve y = %f\n\n",lagrange(11,val,x));
@@ -229,7 +244,7 @@ int main(){
 			for(int i=0;i<2;i++){
 				val[i]=malloc(sizeof(float)*7);
 			}
-
+			
 			val[1][0]=352;
 			val[1][1]=128;
 			val[1][2]=62.3;
@@ -248,9 +263,28 @@ int main(){
 			val[0][5]=300;
 			val[0][6]=500;
 			
+			/*
+			val[1][0]=1;
+			val[1][1]=4;
+			val[1][2]=9;
+			val[1][3]=16;
+			val[1][4]=25;
+			val[1][5]=36;
+			val[1][6]=49;
+			
+			
+
+			val[0][0]=1;
+			val[0][1]=2;
+			val[0][2]=3;
+			val[0][3]=4;
+			val[0][4]=5;
+			val[0][5]=6;
+			val[0][6]=7;
+			*/
 			f=axb(val, 7);
 			printf("On obtient les contantes positives a = %f et A = %f\n",f[1],f[0]);
-			printf("Soit y = %f\n", f[0]*powf(x,-f[1]));
+			printf("Soit y = %f\n", f[0]*powf(x,f[1]));
 
 			for(int i=0;i<2;i++){
 				free(val[i]);
