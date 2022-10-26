@@ -122,12 +122,12 @@ Université Clermont Auvergne\\}
 
 	On cherche à exprimer le polynôme $P_{N-1}$ de la forme :
 	\begin{equation}
-	P_{N-1}(x) = \sum_{i=0}^{(N-1)}y_i\cdot l_i(x)
+	P_{N-1}(x) = \sum_{i=0}^{(N-1)}y_i\cdot l_i(x) \label{lagrange}
 	\end{equation}
 	où $l_i(x)$ est la fonction cardinale définie par :
 	
 	\begin{equation}
-	l_i(x) = \prod_{j=0,j\neq i}^{(N-1)}\frac{x - x_j}{x_i - x_j}
+	l_i(x) = \prod_{j=0,j\neq i}^{(N-1)}\frac{x - x_j}{x_i - x_j} \label{cardinale}
 	\end{equation}
 	
 	\subsubsection{Neville}
@@ -139,25 +139,37 @@ Université Clermont Auvergne\\}
 		\begin{split}
 	&\forall x,P_0[x_i]=y_i,i=1,...,N\\
 	&\forall x,P_1[x_i,x_{}i+1](x)=\frac{(x-x_{i+k})P_{0}[x_i](x)+(x_i-x)P_{0}[x_{i+1}](x)}{x_i-x_{i+1}},i=1,...,N\\
-	&\forall x,P_k[x_i,...,x_{i+1}](x)=\frac{(x-x_{i+k})P_{k-1}[x_i,...,x_{i+k-1}](x)+(x_i-x)P_{k-1}[x_{i+1},...,x{i+k}(x)]}{x_i-x_{i+k}},\\
+	&\forall x,P_k[x_i,...,x_{i+1}](x)=\frac{(x-x_{i+k})P_{k-1}[x_i,...,x_{i+k-1}](x)+(x_i-x)P_{k-1}[x_{i+1},...,x{i+k}(x)]}{x_i-x_{i+k}},\\ \label{neville}
 	&\forall k=2,...,N-1
 		\end{split}
 	\end{align}
 	
 	\subsection{Méthodes d'approximation}
 	
+	L'approximation consiste à obtenir une fonction $f(x)$ dont la distance moyenne entre les $N$ points connues et la courbe soit minimum.\\
+	
 	\subsubsection{Droite de régression}
 	
 	\subsubsection{Ajustement puissance du type $y = ax^b$}
 	
-	\section{Explication fonctions du porgramme}
+	\section{Explication fonctions du programme}
 	
 	\subsection{Fonction Cardinale}
 	
+	\lstinputlisting[language=C, firstline=6, lastline=18, frame=trBL, caption = Fonction auxiliaire cardinale.]{main.c}
+	\medskip
+	Cette fonction a pour rôle de calculer la fonction cardinale à un indice $i$ et pour une valeur $x$ rentré au préalable par l'utilisateur. \ref{cardinale} \\
+	Cette fonction est auxiliaire à celle de Lagrange.\\
 	\subsection{Fonction Lagrange}
 	
+	\lstinputlisting[language=C, firstline=20, lastline=26, frame=trBL, caption = Fonction Lagrange.]{main.c}
+	\medskip
+	Cette fonction permet d'obtenir une solution $y$ selon la variable $x$ rentrée par l'utilisateur et les points données.\\
+	Pour cela, la fonction utilise la méthode d'interpolation de Lagrange afin d'obtenir un polynôme $P_{N-1}$.\ref{lagrange}
 	\subsection{Fonction Neville}
-	
+	\lstinputlisting[language=C, firstline=29, lastline=37, frame=trBL, caption = Fonction Neville.]{main.c}
+	\medskip
+	Il s'agit d'une fonction récursive simulant la méthode d'interpolation de Neville. Le cran d'arrêt va être la variable $k$ indiquant le degré du polynôme. Quant elle atteint zéro, on renvoie la valeur $y_i$. Le $y$ recherché est ensuite calculé grâce aux formules données. \ref{neville}
 	\subsection{Fonction régression}
 	
 	\subsection{Fonction axb}
