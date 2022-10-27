@@ -149,7 +149,32 @@ Université Clermont Auvergne\\}
 	L'approximation consiste à obtenir une fonction $f(x)$ dont la distance moyenne entre les $N$ points connues et la courbe soit minimum.\\
 	
 	\subsubsection{Droite de régression}
-	
+	Le but est d'approcher la fonction $f(x)$ grâce à une droite. On cherche ainsi les coefficients $a_0$ et $a_1$ tel que $f(x)=a_0+a_1x$.\\
+	A partir de système d'équation :\\\\
+	$	
+		\begin{bmatrix}
+		\sum_{i=0}^{N-1}x_i^0&\sum_{i=0}^{N-1}x_i^1\\
+		\sum_{i=0}^{N-1}x_i^1&\sum_{i=0}^{N-1}x_i^2\\
+		\end{bmatrix}
+	$
+	$	
+		\begin{bmatrix}
+		a_0\\a_1\\
+		\end{bmatrix}
+	$
+	$	
+		=
+		\begin{bmatrix}
+		\sum_{i=0}^{N-1}y_ix_i^0\\
+		\sum_{i=0}^{N-1}y_ix_i^1\\
+		\end{bmatrix}
+	$
+	\\\\
+	On obtient les coefficients :\\\\
+	\begin{align*}
+		a_1&=\frac{\bar{yx}-\bar{x}\bar{y}}{\bar{x}^2-(\bar{x})^2}\\\\
+		a_0&=\frac{\bar{y}\bar{x}^2-\bar{x}\bar{yx}}{\bar{x}^2-(\bar{x})^2}
+	\end{align*}
 	\subsubsection{Ajustement puissance du type $y = ax^b$}
 	
 	\section{Explication fonctions du programme}
@@ -169,7 +194,7 @@ Université Clermont Auvergne\\}
 	\subsection{Fonction Neville}
 	\lstinputlisting[language=C, firstline=29, lastline=37, frame=trBL, caption = Fonction Neville.]{main.c}
 	\medskip
-	Il s'agit d'une fonction récursive simulant la méthode d'interpolation de Neville. Le cran d'arrêt va être la variable $k$ indiquant le degré du polynôme. Quant elle atteint zéro, on renvoie la valeur $y_i$. Le $y$ recherché est ensuite calculé grâce aux formules données. \ref{neville}
+	Il s'agit d'une fonction récursive simulant la méthode d'interpolation de Neville. Le cran d'arrêt va être la variable $k$ indiquant le degré du polynôme. Quant elle atteint zéro, on renvoie la valeur $y_i$. Le $y$, solution recherché est ensuite calculé grâce aux formules données. \ref{neville}
 	\subsection{Fonction régression}
 	
 	\subsection{Fonction axb}
