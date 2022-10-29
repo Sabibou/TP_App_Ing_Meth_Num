@@ -5,9 +5,9 @@
 
 /*fonction permettant le calcul de la fonction auxiliaire cardinale
 */
-float cardinale(int N, int i, float *val, float x){  // Soit N le nombre de points, i l'indice, val le tableau contenant les valeurs de x_i, et x le réel rentré par l'utilisateur
-	float denominateur=1;
-	float numerateur=1;
+double cardinale(int N, int i, double *val, double x){  // Soit N le nombre de points, i l'indice, val le tableau contenant les valeurs de x_i, et x le réel rentré par l'utilisateur
+	double denominateur=1;
+	double numerateur=1;
 	for(int j=0; j<N; j++){
 		if(j!=i){   //pour j=0 allant à N-1 (avec j!=i), on calcule séparément le numérateur et le dénominateur
 			denominateur*=(val[i]- val[j]); //on multiplie la valeur du dénominateur possédée par x_i-x_j
@@ -17,8 +17,8 @@ float cardinale(int N, int i, float *val, float x){  // Soit N le nombre de poin
 	return numerateur/denominateur; //on renvoie le résultat approché de la fraction
 }
 
-float lagrange(int N, float **val, float x){
-	float y=0;
+double lagrange(int N, double **val, double x){
+	double y=0;
 	for(int i=0;i<N;i++){
  		y+=val[1][i]*cardinale(N,i,val[0],x);
 	}
@@ -26,7 +26,7 @@ float lagrange(int N, float **val, float x){
 }
 
 
-float neville(int i, int k, float x, float **val){
+double neville(int i, int k, double x, double **val){
 
 	if(k==0){ //quand le polynôme atteint le degré 0 on renvoie y_i
 		return val[1][i];
@@ -36,9 +36,9 @@ float neville(int i, int k, float x, float **val){
 	}
 }
 
-float *regression(float **val, int n){
-	float *fonct=malloc(sizeof(float)*2);
-	float moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0;
+double *regression(double **val, int n){
+	double *fonct=malloc(sizeof(double)*2);
+	double moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0;
 	for(int i=0;i<n;i++){
 		moy_x_au_carre+=powf(val[0][i],2);
 		moy_y+=val[1][i];
@@ -57,9 +57,9 @@ float *regression(float **val, int n){
 
 }
 
-float *axb(float **val, int n){
-	float *fonct=malloc(sizeof(float)*2);
-	float moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0;
+double *axb(double **val, int n){
+	double *fonct=malloc(sizeof(double)*2);
+	double moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0;
 	for(int i=0;i<n;i++){
 		moy_x_au_carre+=powf(log10f(val[0][i]),2);
 		moy_y+=log10f(val[1][i]);
@@ -74,9 +74,9 @@ float *axb(float **val, int n){
 	printf("moy_y : %f\n",moy_y);
 	printf("moy_x : %f\n",moy_x);
 	printf("moy_xy : %f\n", moy_xy);
-	float a=(moy_xy - moy_x*moy_y)/(moy_x_au_carre-powf(moy_x,2));
+	double a=(moy_xy - moy_x*moy_y)/(moy_x_au_carre-powf(moy_x,2));
 	printf("%f\n",moy_y-(a*moy_x));
-	float A=powf(10, moy_y-(a*moy_x));
+	double A=powf(10, moy_y-(a*moy_x));
 	fonct[0]=A;
 	fonct[1]=a;
 	return fonct;
@@ -86,8 +86,8 @@ float *axb(float **val, int n){
 int main(){
 
 	int choix, x;
-	float *f=NULL;
-	float **val=malloc(sizeof(float *)*2);
+	double *f=NULL;
+	double **val=malloc(sizeof(double *)*2);
 	printf("Choississez le jeu d'essai :\n");
 	scanf("%d",&choix);
 	printf("Choississez un point x :\n");
@@ -95,7 +95,7 @@ int main(){
 	switch(choix){
 		case 1:
 			for(int i=0;i<2;i++){
-				val[i]=malloc(sizeof(float)*20);
+				val[i]=malloc(sizeof(double)*20);
 			}
 			for(int i=0;i<20;i++){
 				val[0][i]=i*2;
@@ -122,10 +122,10 @@ int main(){
 			val[1][18]=0.99333;
 			val[1][19]=0.99326;
 
-			printf("Avec la méthode de Lagrange, on trouve y = %f\n\n",lagrange(20,val,x));
-			printf("Avec la méthode de Neville, on trouve y = %f\n\n",neville(0,19,x,val));
+			printf("Avec la méthode de Lagrange, on trouve y = %lf\n\n",lagrange(20,val,x));
+			printf("Avec la méthode de Neville, on trouve y = %lf\n\n",neville(0,19,x,val));
 			f=regression(val, 20);
-			printf("Par aproximation, on obtient la droite de régression : %fx + %f\n\n",f[1],f[0]);
+			printf("Par aproximation, on obtient la droite de régression : %lfx + %lf\n\n",f[1],f[0]);
 
 			for(int i=0;i<2;i++){
 				free(val[i]);
@@ -136,7 +136,7 @@ int main(){
 		case 2 :
 			
 			for(int i=0;i<2;i++){
-				val[i]=malloc(sizeof(float)*21);
+				val[i]=malloc(sizeof(double)*21);
 			}
 
 			val[1][0]=85;
@@ -183,10 +183,10 @@ int main(){
 			val[0][19]=809;
 			val[0][20]=894;
 
-			printf("Avec la méthode de Lagrange, on trouve y = %f\n\n",lagrange(21,val,x));
-			printf("Avec la méthode de Neville, on trouve y = %f\n\n",neville(0,20,x,val));
+			printf("Avec la méthode de Lagrange, on trouve y = %lf\n\n",lagrange(21,val,x));
+			printf("Avec la méthode de Neville, on trouve y = %lf\n\n",neville(0,20,x,val));
 			f=regression(val, 21);
-			printf("Par aproximation, on obtient la droite de régression : %fx + %f\n\n",f[1],f[0]);
+			printf("Par aproximation, on obtient la droite de régression : %lfx + %lf\n\n",f[1],f[0]);
 			
 			for(int i=0;i<2;i++){
 				free(val[i]);
@@ -198,7 +198,7 @@ int main(){
 		case 3 :
 			
 			for(int i=0;i<2;i++){
-				val[i]=malloc(sizeof(float)*11);
+				val[i]=malloc(sizeof(double)*11);
 			}
 			
 			val[1][0]=8.04;
@@ -228,10 +228,10 @@ int main(){
 
 			
 
-			printf("Avec la méthode de Lagrange, on trouve y = %f\n\n",lagrange(11,val,x));
-			printf("Avec la méthode de Neville, on trouve y = %f\n\n",neville(0,10,x,val));
+			printf("Avec la méthode de Lagrange, on trouve y = %lf\n\n",lagrange(11,val,x));
+			printf("Avec la méthode de Neville, on trouve y = %lf\n\n",neville(0,10,x,val));
 			f=regression(val, 11);
-			printf("Par aproximation, on obtient la droite de régression : %fx + %f\n\n",f[1],f[0]);
+			printf("Par aproximation, on obtient la droite de régression : %lfx + %lf\n\n",f[1],f[0]);
 
 			for(int i=0;i<2;i++){
 				free(val[i]);
@@ -242,7 +242,7 @@ int main(){
 
 		case 4 :
 			for(int i=0;i<2;i++){
-				val[i]=malloc(sizeof(float)*7);
+				val[i]=malloc(sizeof(double)*7);
 			}
 			
 			val[1][0]=352;
@@ -283,8 +283,8 @@ int main(){
 			val[0][6]=7;
 			*/
 			f=axb(val, 7);
-			printf("On obtient les contantes positives a = %f et A = %f\n",f[1],f[0]);
-			printf("Soit y = %f\n", f[0]*powf(x,f[1]));
+			printf("On obtient les contantes positives a = %lf et A = %lf\n",-f[1],f[0]);
+			printf("Soit y = %lf\n", f[0]*powf(x,f[1]));
 
 			for(int i=0;i<2;i++){
 				free(val[i]);
