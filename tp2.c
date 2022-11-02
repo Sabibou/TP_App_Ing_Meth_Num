@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-float fonc_card(float * X, int n, float x, int i){
-    float l = 1;
-    float res = 1;
+double fonc_card(double * X, int n, double x, int i){
+    double l = 1;
+    double res = 1;
     for(int j=0;j<n;j++){
         if(j!=i){
             //printf("%f , %f\n",X[i],X[j]);
@@ -15,9 +15,9 @@ float fonc_card(float * X, int n, float x, int i){
     return l;
 }
 
-float lagrange(float** XY, int n, float x){
-    float p = 0;
-    float res = 0;
+double lagrange(double** XY, int n, double x){
+    double p = 0;
+    double res = 0;
     for(int i=0;i<n;i++){
         res = XY[1][i]*fonc_card(XY[0],n,x,i);
         p += res; 
@@ -25,8 +25,8 @@ float lagrange(float** XY, int n, float x){
     return p;
 }
 
-float neville(float** XY, float x, int i, int deg){
-    //float* P = malloc(n*sizeof(float));
+double neville(double** XY, double x, int i, int deg){
+    //double* P = malloc(n*sizeof(double));
     if(deg==0){
         return XY[1][i];
     }
@@ -37,14 +37,14 @@ float neville(float** XY, float x, int i, int deg){
 
 
 struct coefficients{
-    float a0;
-    float a1;
+    double a0;
+    double a1;
 };
 typedef struct coefficients coeff;
 
-coeff regression(float **XY, int n){
+coeff regression(double **XY, int n){
 	coeff c;
-	float x_barre=0,y_barre=0,xy_barre=0,x_barre_au_carre=0;
+	double x_barre=0,y_barre=0,xy_barre=0,x_barre_au_carre=0;
 	for(int i=0;i<n;i++){
 		x_barre_au_carre+=powf(XY[0][i],2);
 		y_barre+=XY[1][i];
@@ -63,9 +63,9 @@ coeff regression(float **XY, int n){
 return c;
 }
 
-coeff ajust_puiss(float **XY, int n){
+coeff ajust_puiss(double **XY, int n){
 	coeff c;
-	float x_barre=0,y_barre=0,xy_barre=0,x_barre_au_carre=0;
+	double x_barre=0,y_barre=0,xy_barre=0,x_barre_au_carre=0;
 	for(int i=0;i<n;i++){
 		x_barre_au_carre+=powf(XY[0][i],2);
 		y_barre+=XY[1][i];
@@ -85,10 +85,10 @@ return c;
 }
 
 int main(){
-   /*  float ** d= malloc(2*sizeof(float*));
+   /*  double ** d= malloc(2*sizeof(double*));
     //int n;
     for(int i=0; i<2;i++){
-        d[i]=malloc(3*sizeof(float));
+        d[i]=malloc(3*sizeof(double));
     }
     d[0][0]=0 ;
     d[0][1]= 2;
@@ -103,9 +103,9 @@ int main(){
     printf("%f ,%f \n",c.a0,c.a1); 
      */
     int choix, x;
-	//float *f=NULL;
+	//double *f=NULL;
     coeff c;
-	float **val=malloc(sizeof(float *)*2);
+	double **val=malloc(sizeof(double *)*2);
 	printf("Choississez le jeu d'essai :\n");
 	scanf("%d",&choix);
 	printf("Choississez un point x :\n");
@@ -113,7 +113,7 @@ int main(){
 	switch(choix){
 		case 1:
 			for(int i=0;i<2;i++){
-				val[i]=malloc(sizeof(float)*20);
+				val[i]=malloc(sizeof(double)*20);
 			}
 			for(int i=0;i<20;i++){
 				val[0][i]=i*2;
@@ -177,7 +177,7 @@ int main(){
 		case 2 :
 			
 			for(int i=0;i<2;i++){
-				val[i]=malloc(sizeof(float)*21);
+				val[i]=malloc(sizeof(double)*21);
 			}
 
 			val[1][0]=85;
@@ -262,7 +262,7 @@ int main(){
 		case 3 :
 			
 			for(int i=0;i<2;i++){
-				val[i]=malloc(sizeof(float)*11);
+				val[i]=malloc(sizeof(double)*11);
 			}
 			
 			val[1][0]=8.04;
@@ -329,7 +329,7 @@ int main(){
 
 		case 4 :
 			for(int i=0;i<2;i++){
-				val[i]=malloc(sizeof(float)*7);
+				val[i]=malloc(sizeof(double)*7);
 			}
 			
 			val[1][0]=352;

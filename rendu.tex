@@ -149,6 +149,7 @@ Université Clermont Auvergne\\}
 	L'approximation consiste à obtenir une fonction $f(x)$ dont la distance moyenne entre les $N$ points connues et la courbe soit minimum.\\
 	
 	\subsubsection{Droite de régression}
+	\label{regression}
 	Le but est d'approcher la fonction $f(x)$ grâce à une droite. On cherche ainsi les coefficients $a_0$ et $a_1$ tel que $f(x)=a_0+a_1x$.\\
 	A partir de système d'équation :\\\\
 	$	
@@ -172,8 +173,8 @@ Université Clermont Auvergne\\}
 	\\\\
 	On obtient les coefficients :\\\\
 	\begin{align*}
-		a_1&=\frac{\bar{yx}-\bar{x}\bar{y}}{\bar{x}^2-(\bar{x})^2}\\\\
-		a_0&=\frac{\bar{y}\bar{x}^2-\bar{x}\bar{yx}}{\bar{x}^2-(\bar{x})^2}
+		a_1&=\frac{\overline{yx}-\bar{x}\bar{y}}{\bar{x}^2-(\bar{x})^2}\\\\
+		a_0&=\frac{\bar{y}\bar{x}^2-\bar{x}\overline{yx}}{\bar{x}^2-(\bar{x})^2}
 	\end{align*}
 	\subsubsection{Ajustement puissance du type $y = ax^b$}
 	
@@ -183,22 +184,24 @@ Université Clermont Auvergne\\}
 	
 	\lstinputlisting[language=C, firstline=6, lastline=18, frame=trBL, caption = Fonction auxiliaire cardinale.]{main.c}
 	\medskip
-	Cette fonction a pour rôle de calculer la fonction cardinale à un indice $i$ et pour une valeur $x$ rentré au préalable par l'utilisateur. \ref{cardinale} \\
+	Cette fonction a pour rôle de calculer la fonction cardinale à un indice $i$ et pour une valeur $x$ rentré au préalable par l'utilisateur. (voir section \nameref{cardinale}) \\
 	Cette fonction est auxiliaire à celle de Lagrange.\\
 	\subsection{Fonction Lagrange}
 	
 	\lstinputlisting[language=C, firstline=20, lastline=26, frame=trBL, caption = Fonction Lagrange.]{main.c}
 	\medskip
 	Cette fonction permet d'obtenir une solution $y$ selon la variable $x$ rentrée par l'utilisateur et les points données.\\
-	Pour cela, la fonction utilise la méthode d'interpolation de Lagrange afin d'obtenir un polynôme $P_{N-1}$.\ref{lagrange}
+	Pour cela, la fonction utilise la méthode d'interpolation de Lagrange afin d'obtenir un \hyperref[lagrange]{polynôme $P_{N-1}$}.
 	\subsection{Fonction Neville}
 	\lstinputlisting[language=C, firstline=29, lastline=37, frame=trBL, caption = Fonction Neville.]{main.c}
 	\medskip
-	Il s'agit d'une fonction récursive simulant la méthode d'interpolation de Neville. Le cran d'arrêt va être la variable $k$ indiquant le degré du polynôme. Quant elle atteint zéro, on renvoie la valeur $y_i$. Le $y$, solution recherché est ensuite calculé grâce aux formules données. \ref{neville}
+	Il s'agit d'une fonction récursive simulant la méthode d'interpolation de Neville. Le cran d'arrêt va être la variable $k$ indiquant le degré du polynôme. Quant elle atteint zéro, on renvoie la valeur $y_i$. Le $y$, solution recherché est ensuite calculé grâce aux formules données. (voir section \nameref{neville})
 	\subsection{Fonction régression}
+	\lstinputlisting[language=C, firstline=39, lastline=58, frame=trBL, caption = Fonction de la droite de regression linéaire.]{main.c}
 	
+	La fonction régression permet d'obtenir les coefficinets $a_0$ et $a_1$ de  la droite de regression. (voir section \nameref{regression})
 	\subsection{Fonction axb}
-	
+	\lstinputlisting[language=C, firstline=60, lastline=84, frame=trBL, caption = Fonction de l'ajjustement puissance.]{main.c}
 	\section{Analyse jeux d'essais}
 	
 	\subsection{Densité ($D$) de l'eau en fonction de la température (T)}

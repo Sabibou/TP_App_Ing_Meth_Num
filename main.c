@@ -37,29 +37,29 @@ double neville(int i, int k, double x, double **val){
 }
 
 double *regression(double **val, int n){
-	double *fonct=malloc(sizeof(double)*2);
-	double moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0;
+	double *fonct=malloc(sizeof(double)*2); //permet de stocker les  coefficients de la droite de regression a0 et a1
+	double moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0; //initialisation des variables
 	for(int i=0;i<n;i++){
-		moy_x_au_carre+=powf(val[0][i],2);
-		moy_y+=val[1][i];
-		moy_x+=val[0][i];
-		moy_xy+=val[0][i]*val[1][i];
+		moy_x_au_carre+=powf(val[0][i],2); //la somme des carrés des abscisses(x²_i)
+		moy_y+=val[1][i]; // la somme des ordonnées(y_i)
+		moy_x+=val[0][i]; // la somme des abscisses(x_i)
+		moy_xy+=val[0][i]*val[1][i]; // la somme du produit des ordonnées et des abscisses(xy_i)
 	}
 	
-	moy_y=moy_y/n;
-	moy_x_au_carre=moy_x_au_carre/n;
-	moy_x=moy_x/n;
-	moy_xy=moy_xy/n;
+	moy_y=moy_y/n; //la moyenne des y_i
+	moy_x_au_carre=moy_x_au_carre/n; //la moyenne des x²_i
+	moy_x=moy_x/n; //la moyenne des x_i
+	moy_xy=moy_xy/n; //la moyenne des xy_i
 	
-	fonct[1]=(moy_xy - moy_x*moy_y)/(moy_x_au_carre-powf(moy_x,2));
-	fonct[0]=(moy_y*moy_x_au_carre-moy_x*moy_xy)/(moy_x_au_carre-powf(moy_x,2));
+	fonct[1]=(moy_xy - moy_x*moy_y)/(moy_x_au_carre-powf(moy_x,2)); //coefficient a1
+	fonct[0]=(moy_y*moy_x_au_carre-moy_x*moy_xy)/(moy_x_au_carre-powf(moy_x,2)); //coefficient a0
 	return fonct;
 
 }
 
 double *axb(double **val, int n){
-	double *fonct=malloc(sizeof(double)*2);
-	double moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0;
+	double *fonct=malloc(sizeof(double)*2);//permet de stocker les  coefficients de l'ajustement puissance a et A
+	double moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0;//initialisation des variables
 	for(int i=0;i<n;i++){
 		moy_x_au_carre+=powf(log10f(val[0][i]),2);
 		moy_y+=log10f(val[1][i]);
