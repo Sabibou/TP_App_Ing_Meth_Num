@@ -139,7 +139,7 @@ Université Clermont Auvergne\\}
 		\begin{split}
 	&\forall x,P_0[x_i]=y_i,i=1,...,N\\
 	&\forall x,P_1[x_i,x_{}i+1](x)=\frac{(x-x_{i+k})P_{0}[x_i](x)+(x_i-x)P_{0}[x_{i+1}](x)}{x_i-x_{i+1}},i=1,...,N\\
-	&\forall x,P_k[x_i,...,x_{i+1}](x)=\frac{(x-x_{i+k})P_{k-1}[x_i,...,x_{i+k-1}](x)+(x_i-x)P_{k-1}[x_{i+1},...,x{i+k}(x)]}{x_i-x_{i+k}},\\ \label{neville}
+	&\forall x,P_k[x_i,...,x_{i+1}](x)=\frac{(x-x_{i+k})P_{k-1}[x_i,...,x_{i+k-1}](x)+(x_i-x)P_{k-1}[x_{i+1},...,x{i+k}](x)}{x_i-x_{i+k}},\\ \label{neville}
 	&\forall k=2,...,N-1
 		\end{split}
 	\end{align}
@@ -177,6 +177,38 @@ Université Clermont Auvergne\\}
 		a_0&=\frac{\bar{y}\bar{x}^2-\bar{x}\overline{yx}}{\bar{x}^2-(\bar{x})^2}
 	\end{align*}
 	\subsubsection{Ajustement puissance du type $y = ax^b$}
+	
+	Le but de cette méthode est aussi d'obtenir une fonction, approchant au mieux les $N$ points connues.\\
+	On cherche alors $f(x)=ax^b$.\\
+	
+	Pour cela, on manipule cette équation :
+	
+	\begin{align*}
+		y&=ax^b\\
+		log y&=log(ax^b)\\
+		log(y)&=log(a)+b\cdot log(x)\\
+	\end{align*}
+	On pose :
+	
+	\begin{align*}
+	Y&=log(y_i)\\
+	X&=log(x_i)\\
+	A&=log(a)\\
+	\end{align*}
+	
+	On obtient alors :
+	
+	\begin{align*}
+	Y&=A+b\cdot X\\
+	A&=\bar{Y}-b\cdot \bar{X}\\
+	a&=10^A\\
+	\end{align*}
+	
+	avec :
+	\begin{equation*}
+		b=\frac{\overline{yx}-\bar{x}\bar{y}}{\bar{x}^2-(\bar{x})^2}
+	\end{equation*}
+	
 	
 	\section{Explication fonctions du programme}
 	
