@@ -70,15 +70,10 @@ double *axb(double **val, int n){
 	moy_x_au_carre=moy_x_au_carre/n;
 	moy_x=moy_x/n;
 	moy_xy=moy_xy/n;
-	printf("moy_x_au_carre : %f\n",moy_x_au_carre);
-	printf("moy_y : %f\n",moy_y);
-	printf("moy_x : %f\n",moy_x);
-	printf("moy_xy : %f\n", moy_xy);
-	double a=(moy_xy - moy_x*moy_y)/(moy_x_au_carre-powf(moy_x,2));
-	printf("%f\n",moy_y-(a*moy_x));
-	double A=powf(10, moy_y-(a*moy_x));
-	fonct[0]=A;
-	fonct[1]=a;
+	double b=(moy_xy - moy_x*moy_y)/(moy_x_au_carre-powf(moy_x,2));  //calcul du coeff b
+	double a=powf(10, moy_y-(b*moy_x)); //calcul du coeff a
+	fonct[0]=a;
+	fonct[1]=b;
 	return fonct;
 
 }
@@ -263,25 +258,6 @@ int main(){
 			val[0][5]=300;
 			val[0][6]=500;
 			
-			/*
-			val[1][0]=1;
-			val[1][1]=4;
-			val[1][2]=9;
-			val[1][3]=16;
-			val[1][4]=25;
-			val[1][5]=36;
-			val[1][6]=49;
-			
-			
-
-			val[0][0]=1;
-			val[0][1]=2;
-			val[0][2]=3;
-			val[0][3]=4;
-			val[0][4]=5;
-			val[0][5]=6;
-			val[0][6]=7;
-			*/
 			f=axb(val, 7);
 			printf("On obtient les contantes positives a = %lf et A = %lf\n",-f[1],f[0]);
 			printf("Soit y = %lf\n", f[0]*powf(x,f[1]));
