@@ -242,11 +242,11 @@ int main(){
                 fprintf(f2,"%f,%f\n",val[0][j],val[1][j]);
             }
             fprintf(f2,"%s \n", "Lagrange");
-            for(int i=400;i<1001;i++){
+            for(int i=460;i<921;i++){
                 fprintf(f2,"%d,%f\n",i,lagrange(val,20,i));
             }
             fprintf(f2,"%s \n", "Neville");
-            for(int i=400;i<1001;i++){
+            for(int i=460;i<921;i++){
                 fprintf(f2,"%d,%f\n",i,neville(val,i,0,19));
             }
             
@@ -310,11 +310,11 @@ int main(){
                 fprintf(f3,"%f,%f\n",val[0][j],val[1][j]);
             }
             fprintf(f3,"%s \n", "Lagrange");
-            for(int i=0;i<21;i++){
+            for(int i=0;i<16;i++){
                 fprintf(f3,"%d,%f\n",i,lagrange(val,20,i));
             }
             fprintf(f3,"%s \n", "Neville");
-            for(int i=0;i<21;i++){
+            for(int i=0;i<16;i++){
                 fprintf(f3,"%d,%f\n",i,neville(val,i,0,19));
             }
             
