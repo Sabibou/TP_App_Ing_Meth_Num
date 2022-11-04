@@ -267,6 +267,8 @@ Université Clermont Auvergne\\}
 	\section{Analyse jeux d'essais}
 	
 	\subsection{Densité ($D$) de l'eau en fonction de la température (T)}
+		Les données connues représentent la densité de l'eau (en $t/m^3$) en fonction de la température (en $°C$).\\
+		On remarque avec ces données que la densité diminue alors que la température augmente.\\
 		\begin{figure}[H]
 		\includegraphics[width=\textwidth]{"11.png"}
 		\caption{Interpolation de Lagrange pour le jeu d'essai 1.}
@@ -276,11 +278,20 @@ Université Clermont Auvergne\\}
 		\includegraphics[width=\textwidth]{"12.png"}
 		\caption{Interpolation de Neville pour le jeu d'essai 1.}
 		\end{figure}
+	
+		\begin{itemize}
+			\item On remarque qu'on obtient les mêmes graphiques $\rightarrow$ unicité des polynômes
+			\item On remarque qu'à partir de $x=36$ le polynôme croit de façon exponentielle $\rightarrow$ le polynôme n'est plus fiable
+		\end{itemize}
 		
 		\begin{figure}[H]
 		\includegraphics[width=\textwidth]{"13.png"}
 		\caption{Approximation selon la régression linéaire pour le jeu d'essai 1.}
 		\end{figure}
+	
+		\begin{itemize}
+			\item la fonction décroît $\rightarrow$ représente bien la situation
+		\end{itemize}
 
 	\subsection{Dépenses mensuelles et revenus}
 		\begin{figure}[H]
