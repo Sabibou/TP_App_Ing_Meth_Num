@@ -217,25 +217,53 @@ Université Clermont Auvergne\\}
 	\lstinputlisting[language=C, firstline=6, lastline=18, frame=trBL, caption = Fonction auxiliaire cardinale.]{main.c}
 	\medskip
 	Cette fonction a pour rôle de calculer la fonction cardinale à un indice $i$ et pour une valeur $x$ rentré au préalable par l'utilisateur. (voir section \ref{cardinale}) \\
-	Cette fonction est auxiliaire à celle de Lagrange.\\
+	Cette fonction est auxiliaire à celle de Lagrange.\\\\
+	\textbf{Entrée} : N, le nombre de points, le réel x, un indice i et un tableau contenant les valeurs x du jeu\\
+	\textbf{Sortie} : $l_i(x)$\\
+	\textbf{Complexité spatiale} : $O(n)$\\
+	\textbf{Complexité temporelle} : $O(n)$\\
 	\subsection{Fonction Lagrange}
 	
 	\lstinputlisting[language=C, firstline=20, lastline=26, frame=trBL, caption = Fonction Lagrange.]{main.c}
 	\medskip
 	Cette fonction permet d'obtenir une solution $y$ selon la variable $x$ rentrée par l'utilisateur et les points données.\\
-	Pour cela, la fonction utilise la méthode d'interpolation de Lagrange afin d'obtenir un polynôme $P_{N-1}$. (voir section \ref{lagrange})
+	Pour cela, la fonction utilise la méthode d'interpolation de Lagrange afin d'obtenir un polynôme $P_{N-1}$. (voir section \ref{lagrange})\\
+	
+	\textbf{Entrée} : N, le nombre de points, le réel x et un tableau contenant les valeurs x et y du jeu\\
+	\textbf{Sortie} : $y$\\
+	\textbf{Complexité spatiale} : $O(n^2)$\\
+	\textbf{Complexité temporelle} :$O(n^2)$\\
+	
 	\subsection{Fonction Neville}
 	\lstinputlisting[language=C, firstline=29, lastline=37, frame=trBL, caption = Fonction Neville.]{main.c}
 	\medskip
-	Il s'agit d'une fonction récursive simulant la méthode d'interpolation de Neville. Le cran d'arrêt va être la variable $k$ indiquant le degré du polynôme. Quant elle atteint zéro, on renvoie la valeur $y_i$. Le $y$, solution recherché est ensuite calculé grâce aux formules données. (voir section \ref{nev})
+	Il s'agit d'une fonction récursive simulant la méthode d'interpolation de Neville. Le cran d'arrêt va être la variable $k$ indiquant le degré du polynôme. Quant elle atteint zéro, on renvoie la valeur $y_i$. Le $y$, solution recherché est ensuite calculé grâce aux formules données. (voir section \ref{nev})\\
+	
+	\textbf{Entrée} : N, le nombre de points, le réel x, un indice i et un tableau contenant les valeurs x et y du jeu\\
+	\textbf{Sortie} : $y$\\
+	\textbf{Complexité spatiale} : $O(1)$\\
+	\textbf{Complexité temporelle} : $O(log(n)) $\\
+	
 	\subsection{Fonction régression}
 	\lstinputlisting[language=C, firstline=39, lastline=58, frame=trBL, caption = Fonction de la droite de regression linéaire.]{main.c}
 	
-	La fonction \textbf{régression} permet d'obtenir les coefficients $a_0$ et $a_1$ de  la droite de régression. (voir section \ref{regression})
+	La fonction \textbf{régression} permet d'obtenir les coefficients $a_0$ et $a_1$ de  la droite de régression. (voir section \ref{regression})\\
+	
+	\textbf{Entrée} : N, le nombre de points et un tableau contenant les valeurs x et y du jeu\\
+	\textbf{Sortie} : $a_1$ et $a_0$, les coefficients de la fonction recherchée, stockées dans un tableau\\
+	\textbf{Complexité spatiale} : $O(n)$\\
+	\textbf{Complexité temporelle} : $O(n) $\\
+	
 	\subsection{Fonction axb}
 	\lstinputlisting[language=C, firstline=60, lastline=80, frame=trBL, caption = Fonction de l'ajustement puissance.]{main.c}
 	\medskip
-	Cette fonction permet le calcul des coefficients $a$ et $b$ d'une fonction du type $ax^b$. (voir section \ref{axb})
+	Cette fonction permet le calcul des coefficients $a$ et $b$ d'une fonction du type $ax^b$. (voir section \ref{axb})\\
+	
+	\textbf{Entrée} : N, le nombre de points et un tableau contenant les valeurs x et y du jeu\\
+	\textbf{Sortie} : $a$ et $b$, les coefficients de la fonction recherchée, stockées dans un tableau\\
+	\textbf{Complexité spatiale} : $O(n)$\\
+	\textbf{Complexité temporelle} : $O(n) $\\
+	
 	\section{Analyse jeux d'essais}
 	
 	\subsection{Densité ($D$) de l'eau en fonction de la température (T)}
