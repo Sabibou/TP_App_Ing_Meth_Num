@@ -67,10 +67,10 @@ coeff ajust_puiss(double **XY, int n){
 	coeff c;
 	double x_barre=0,y_barre=0,xy_barre=0,x_barre_au_carre=0;
 	for(int i=0;i<n;i++){
-		x_barre_au_carre+=powf(XY[0][i],2);
-		y_barre+=XY[1][i];
-		x_barre+=XY[0][i];
-		xy_barre+=XY[0][i]*XY[1][i];
+		x_barre_au_carre+=powf(log10(XY[0][i]),2);
+		y_barre+=log10(XY[1][i]);
+		x_barre+=log10(XY[0][i]);
+		xy_barre+=log10(XY[0][i])*log10(XY[1][i]);
 	}
 	
 	y_barre=y_barre/n;
@@ -78,10 +78,26 @@ coeff ajust_puiss(double **XY, int n){
 	x_barre=x_barre/n;
 	xy_barre=xy_barre/n;
 	
-	c.a1=(xy_barre - x_barre*y_barre)/(x_barre_au_carre-powf(x_barre,2));
-	c.a0=(y_barre*x_barre_au_carre-x_barre*xy_barre)/(x_barre_au_carre-powf(x_barre,2));
-
+	c.a1=(-xy_barre + x_barre*y_barre)/(x_barre_au_carre-powf(x_barre,2));
+	c.a0=powf(10, y_barre+(c.a1*x_barre));
 return c;
+	/* double *fonct=malloc(sizeof(double)*2);//permet de stocker les  coefficients de l'ajustement puissance a et A
+	double moy_x=0,moy_y=0,moy_xy=0,moy_x_au_carre=0;//initialisation des variables
+	for(int i=0;i<n;i++){
+		moy_x_au_carre+=powf(log10(val[0][i]),2);
+		moy_y+=log10(val[1][i]);
+		moy_x+=log10(val[0][i]);
+		moy_xy+=log10(val[0][i])*log10(val[1][i]);
+	}
+	moy_y=moy_y/n;
+	moy_x_au_carre=moy_x_au_carre/n;
+	moy_x=moy_x/n;
+	moy_xy=moy_xy/n;
+	double b=(moy_xy - moy_x*moy_y)/(moy_x_au_carre-powf(moy_x,2));  //calcul du coeff b
+	double a=powf(10, moy_y+(b*moy_x)); //calcul du coeff a
+	fonct[0]=a;
+	fonct[1]=b;
+	return fonct; */
 }
 
 int main(){
@@ -242,12 +258,12 @@ int main(){
                 fprintf(f2,"%f,%f\n",val[0][j],val[1][j]);
             }
             fprintf(f2,"%s \n", "Lagrange");
-            for(int i=460;i<921;i++){
-                fprintf(f2,"%d,%f\n",i,lagrange(val,20,i));
+            for(int i=460;i<1001;i++){
+                fprintf(f2,"%d,%f\n",i,lagrange(val,21,i));
             }
             fprintf(f2,"%s \n", "Neville");
-            for(int i=460;i<921;i++){
-                fprintf(f2,"%d,%f\n",i,neville(val,i,0,19));
+            for(int i=460;i<1001;i++){
+                fprintf(f2,"%d,%f\n",i,neville(val,i,0,20));
             }
             
             fclose(f2);
@@ -310,12 +326,12 @@ int main(){
                 fprintf(f3,"%f,%f\n",val[0][j],val[1][j]);
             }
             fprintf(f3,"%s \n", "Lagrange");
-            for(int i=0;i<16;i++){
-                fprintf(f3,"%d,%f\n",i,lagrange(val,20,i));
+            for(int i=0;i<21;i++){
+                fprintf(f3,"%d,%f\n",i,lagrange(val,11,i));
             }
             fprintf(f3,"%s \n", "Neville");
-            for(int i=0;i<16;i++){
-                fprintf(f3,"%d,%f\n",i,neville(val,i,0,19));
+            for(int i=0;i<21;i++){
+                fprintf(f3,"%d,%f\n",i,neville(val,i,0,10));
             }
             
             fclose(f3);
@@ -370,8 +386,8 @@ int main(){
 			val[0][6]=7;
 			*/
 			c=ajust_puiss(val, 7);
-			printf("On obtient les contantes positives a = %lf et A = %lf\n",-c.a1,c.a0);
-			printf("Soit y = %lf\n", c.a0*powf(x,c.a1));
+			printf("On obtient les contantes positives a = %lf et A = %lf\n",c.a1,c.a0);
+			printf("Soit y = %lf\n", c.a0*powf(x,(-c.a1)));
 
             FILE *f4 = NULL;
             //create and open the text file

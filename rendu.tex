@@ -310,9 +310,12 @@ Université Clermont Auvergne\\}
 		\end{figure}
 		
 	\subsection{Série $S$ dûe à Ascombe}
-	Cette série fait partie du quartet d'Anscombe qui est constitué de quatre ensembles de données qui ont les mêmes propriétés statistiques simples. Ils ont été construits par le statisticien Francis Anscombe dans le but de démontrer l'importance de tracer les graphiques avant d'analyser des données, car cela permet notamment d'estimer l'incidence des données aberrantes sur les différentes indices statistiques que l'on pourrait calculer.\footnote{https://fr.wikipedia.org/wiki/Quartet_d%27Anscombe}.
-	Cette série contient $11$ points de données avec une moyenne des abcisses de $9$ et une moyenne des ordonnées de $7.5$
+	
+	Cette série fait partie du quartet d'Anscombe qui est constitué de quatre ensembles de données qui ont les mêmes propriétés statistiques simples. Ils ont été construits par le statisticien Francis Anscombe dans le but de démontrer l'importance de tracer les graphiques avant d'analyser des données, car cela permet notamment d'estimer l'incidence des données aberrantes sur les différentes indices statistiques que l'on pourrait calculer\footnote{\url{https://fr.wikipedia.org/wiki/Quartet_d\%27Anscombe}}.\\
+	Cette série contient $11$ points de données (représentés en point rouges) avec une moyenne des abcisses de $9$ et une moyenne des ordonnées de $7.5$.
 		\begin{figure}[H]
+		
+Ici on a déterminé les $y_i$ de chacun des $x_i$ allant de $0$ à $20$ par les polynômes obtenus respectivement par la méthode de Lagrange et de Neville et on les a représentés sur les graphiques ci-dessous.
 		\includegraphics[width=\textwidth]{"31.png"}
 		\caption{Interpolation de Lagrange pour le jeu d'essai 3.}
 		\end{figure}
@@ -322,20 +325,22 @@ Université Clermont Auvergne\\}
 		\caption{Interpolation de Neville pour le jeu d'essai 3.}
 		\end{figure}
 		
+Les polynômes d'interpolation de Lagrange et de Neville n'approchent pas bien l'ensemble de données là où les données ne sont pas connues.\\
+En fait, lorsqu'on augmente le nombre de points, on constate que le polynôme se met à osciller fortement entre les points $x_i$ avec une amplitude de plus en plus grande, comme l'illustre les figures ci-dessus.
 		\begin{figure}[H]
 		\includegraphics[width=\textwidth]{"33.png"}
 		\caption{Approximation selon la régression linéaire pour le jeu d'essai 3.}
 		\end{figure}
-	
+Le but de l'approximation par la droite de régression est de trouver la droite qui passe par le plus de points de l'ensemble de données.
 	\subsection{Loi de Pareto}
-	
+On vérifie la loi de Pareto entre un revenu $x$ et le nombre de personnes $y$ ayant un revenu supérieur à $x$. On remarque après calcul qu'un pourcentage cumulé de $82.08\%$ ont un revenu supérieur à $50$.
 		\begin{figure}[H]
 		\includegraphics[width=\textwidth]{"4.png"}
 		\caption{Ajustement puissance pour le jeu d'essai 4.}
 		\end{figure}
-	
+Plus le revenu $x$ augmente, plus vite le nombre de personnes $y$ ayant un revenu supérieur à $x$ diminue de façon exponentielle et tend vers $0$.¨
 	\section{Conclusion}
 	
-	
+Pour approcher une fonction avec des polynômes, on peut préférer utiliser des polynômes par morceaux. Dans ce cas, pour améliorer l'approximation, on augmente le nombre de morceaux et non le degré des polynômes. (Segmentation)	
 	
 \end{document}
