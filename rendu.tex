@@ -267,8 +267,12 @@ Université Clermont Auvergne\\}
 	\section{Analyse jeux d'essais}
 	
 	\subsection{Densité ($D$) de l'eau en fonction de la température (T)}
-		Les données connues représentent la densité de l'eau (en $t/m^3$) en fonction de la température (en $°C$).\\
+		Les données connues représentent la densité de l'eau (en $t/m^3$) en fonction de la température (en $^\circ C$).\\
 		On remarque avec ces données que la densité diminue alors que la température augmente.\\
+		Cette série contient $20$ points (en rouge sur le graphique) avec une moyenne des abscisses de $19$ et une moyenne d'ordonnées de $0.997638
+		$.\\
+		
+		On a déterminé les $y_i$ de chacun des $x_i$ allant de $0$ à $40$ par les polynômes obtenus respectivement par la méthode de Lagrange et de Neville et on les a représentés sur les graphiques ci-dessous.\\
 		\begin{figure}[H]
 		\includegraphics[width=\textwidth]{"11.png"}
 		\caption{Interpolation de Lagrange pour le jeu d'essai 1.}
@@ -279,21 +283,24 @@ Université Clermont Auvergne\\}
 		\caption{Interpolation de Neville pour le jeu d'essai 1.}
 		\end{figure}
 	
-		\begin{itemize}
-			\item On remarque qu'on obtient les mêmes graphiques $\rightarrow$ unicité des polynômes
-			\item On remarque qu'à partir de $x=36$ le polynôme croit de façon exponentielle $\rightarrow$ le polynôme n'est plus fiable
-		\end{itemize}
+		On remarque qu'on obtient les mêmes graphiques pour les méthodes de Neville et de Lagrange traduisant l'unicité des polynômes.\\
+		On remarque qu'à partir de $x=36$ le polynôme croit de façon exponentielle. Le polynôme n'est plus fiable.\\
+		
 		
 		\begin{figure}[H]
 		\includegraphics[width=\textwidth]{"13.png"}
 		\caption{Approximation selon la régression linéaire pour le jeu d'essai 1.}
 		\end{figure}
 	
-		\begin{itemize}
-			\item la fonction décroît $\rightarrow$ représente bien la situation
-		\end{itemize}
+		La droite de régression décroît et semble bien représenter la situation.\\
+		
+		
 
 	\subsection{Dépenses mensuelles et revenus}
+	\label{dr}
+		Cette série établit le lien entre les revenus des employés d'une entreprise et leurs dépenses.\\
+		On remarque que les dépenses sont un peu près les mêmes pour les employés ayant un revenu inférieur à 900. Après cela, les dépenses augmentent considérablement.\\
+		Cette série contient $21$ points (en rouge sur le graphique) avec une moyenne des abscisses de $747.095238$ et une moyenne d'ordonnées de $129.666667$.\\
 		\begin{figure}[H]
 		\includegraphics[width=\textwidth]{"21.png"}
 		\caption{Interpolation de Lagrange pour le jeu d'essai 2.}
@@ -303,16 +310,23 @@ Université Clermont Auvergne\\}
 		\includegraphics[width=\textwidth]{"22.png"}
 		\caption{Interpolation de Neville pour le jeu d'essai 2.}
 		\end{figure}
+	
+		On remarque encore une fois l'unicité des polynômes.\\
+		De nouveau, si on s'éloigne du jeu de données les valeurs renvoyées par les polynômes ne sont plus fiables.\\
 		
 		\begin{figure}[H]
 		\includegraphics[width=\textwidth]{"23.png"}
 		\caption{Approximation selon la régression linéaire pour le jeu d'essai 2.}
 		\end{figure}
+	
+		L'approximation semble appropriée à ce cas car on elle démontre bien la tendance d'augmentation des dépenses avec le revenue.\\
+	
+		
 		
 	\subsection{Série $S$ dûe à Ascombe}
 	
 	Cette série fait partie du quartet d'Anscombe qui est constitué de quatre ensembles de données qui ont les mêmes propriétés statistiques simples. Ils ont été construits par le statisticien Francis Anscombe dans le but de démontrer l'importance de tracer les graphiques avant d'analyser des données, car cela permet notamment d'estimer l'incidence des données aberrantes sur les différentes indices statistiques que l'on pourrait calculer\footnote{\url{https://fr.wikipedia.org/wiki/Quartet_d\%27Anscombe}}.\\
-	Cette série contient $11$ points de données (représentés en point rouges) avec une moyenne des abcisses de $9$ et une moyenne des ordonnées de $7.5$.
+	Cette série contient $11$ points de données (représentés en point rouges) avec une moyenne des abscisses de $9$ et une moyenne des ordonnées de $7.5$.
 		\begin{figure}[H]
 		
 Ici on a déterminé les $y_i$ de chacun des $x_i$ allant de $0$ à $20$ par les polynômes obtenus respectivement par la méthode de Lagrange et de Neville et on les a représentés sur les graphiques ci-dessous.
@@ -340,7 +354,9 @@ On vérifie la loi de Pareto entre un revenu $x$ et le nombre de personnes $y$ a
 		\end{figure}
 Plus le revenu $x$ augmente, plus vite le nombre de personnes $y$ ayant un revenu supérieur à $x$ diminue de façon exponentielle et tend vers $0$.¨
 	\section{Conclusion}
-	
-Pour approcher une fonction avec des polynômes, on peut préférer utiliser des polynômes par morceaux. Dans ce cas, pour améliorer l'approximation, on augmente le nombre de morceaux et non le degré des polynômes. (Segmentation)	
+
+Les méthodes d'interpolation de Lagrange et de Neville permettent d'obtenir un même polynôme pour un même jeu de données.\\
+Pour approcher une fonction avec des polynômes, on peut préférer utiliser des polynômes par morceaux. Dans ce cas, pour améliorer l'interpolation, on augmente le nombre de morceaux et non le degré des polynômes. (Segmentation)\\
+Lorsque la relation entre les $x$ et $y$ ne sont pas reliés par une formule alors on peut préférer l'approximation qui permet de libérer une tendance de ces données (par exemple le lien entre les dépenses et les revenus\ref{dr}).
 	
 \end{document}
