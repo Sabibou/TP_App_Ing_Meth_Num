@@ -299,7 +299,9 @@ Université Clermont Auvergne\\}
 	\subsection{Dépenses mensuelles et revenus}
 	\label{dr}
 		Cette série établit le lien entre les revenus des employés d'une entreprise et leurs dépenses.\\
-		On remarque que les dépenses sont un peu près les mêmes pour les employés ayant un revenu inférieur à 900. Après cela, les dépenses augmentent considérablement.\\
+		On remarque que les dépenses sont un peu près les mêmes pour les employés ayant un revenu inférieur à 900. Après cela, les dépenses augmentent considérablement.
+		
+		
 		Cette série contient $21$ points (en rouge sur le graphique) avec une moyenne des abscisses de $747.095238$ et une moyenne d'ordonnées de $129.666667$.\\
 		\begin{figure}[H]
 		\includegraphics[width=\textwidth]{"21.png"}
@@ -352,11 +354,15 @@ On vérifie la loi de Pareto entre un revenu $x$ et le nombre de personnes $y$ a
 		\includegraphics[width=\textwidth]{"4.png"}
 		\caption{Ajustement puissance pour le jeu d'essai 4.}
 		\end{figure}
-Plus le revenu $x$ augmente, plus vite le nombre de personnes $y$ ayant un revenu supérieur à $x$ diminue de façon exponentielle et tend vers $0$.¨
+Plus le revenu $x$ augmente, plus vite le nombre de personnes $y$ ayant un revenu supérieur à $x$ diminue de façon exponentielle et tend vers $0$.
 	\section{Conclusion}
 
-Les méthodes d'interpolation de Lagrange et de Neville permettent d'obtenir un même polynôme pour un même jeu de données.\\
-Pour approcher une fonction avec des polynômes, on peut préférer utiliser des polynômes par morceaux. Dans ce cas, pour améliorer l'interpolation, on augmente le nombre de morceaux et non le degré des polynômes. (Segmentation)\\
-Lorsque la relation entre les $x$ et $y$ ne sont pas reliés par une formule alors on peut préférer l'approximation qui permet de libérer une tendance de ces données (par exemple le lien entre les dépenses et les revenus\ref{dr}).
+	Les méthodes d'interpolation de Lagrange et de Neville permettent d'obtenir un même polynôme (ce qui démontre l'unicité du polynôme)pour un même jeu de données. 
+	
+	De plus, on remarque la représenattion du polynôme sur les graphiques est en parfaite adéquation avec les données connues et quelque fois en inadéquation avec les données non connues. Après modification (ajout de plusieurs points de données) des jeux de données, on a remarqué une fluctuation avec de grandes amplitudes surtout au niveau des points de données aux deux extrémités du jeu de données.\\
+	
+	Pour approcher une fonction avec des polynômes, on peut préférer utiliser des polynômes par morceaux. Dans ce cas, pour améliorer l'interpolation, on augmente le nombre de morceaux et non le degré des polynômes (Segmentation) ce qui peut corriger les oscillations de grandes amplitudes remarquées dans les graphiques.\\
+	
+	Lorsque la relation entre les $x$ et $y$ ne sont pas reliés par une formule alors on peut préférer l'approximation qui permet de libérer une tendance de ces données (par exemple le lien entre les dépenses et les revenus \ref{dr}).
 	
 \end{document}
